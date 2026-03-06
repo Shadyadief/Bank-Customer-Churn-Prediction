@@ -27,7 +27,7 @@ MODELS = {
 }
 
 
-def train_model(model, X_train, y_train, model_name: str):
+def train_model(model, X_train, y_train, model_name: str, models_dir: str = "models"):
     """
     يدرّب موديل واحد ويحفظه.
 
@@ -43,8 +43,9 @@ def train_model(model, X_train, y_train, model_name: str):
     print(f"🚀 بيدرّب: {model_name}...")
     model.fit(X_train, y_train)
 
-    os.makedirs(MODELS_DIR, exist_ok=True)
-    save_path = os.path.join(MODELS_DIR, f"{model_name}.pkl")
+    os.makedirs(models_dir, exist_ok=True)
+    save_path = os.path.join(models_dir, f"{model_name}.pkl")
+
     joblib.dump(model, save_path)
     print(f"✅ تم الحفظ في: {save_path}")
 
