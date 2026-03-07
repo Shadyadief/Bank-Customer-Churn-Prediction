@@ -10,7 +10,9 @@ st.set_page_config(page_title="EDA Dashboard", page_icon="📊", layout="wide")
 # ─── Load Data ─────────────────────────────────────────────────
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/raw/Churn_Modelling.csv")
+    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    path = os.path.join(base_dir, "data", "raw", "Churn_Modelling.csv")
+    df = pd.read_csv(path)
     df = df.drop(['RowNumber', 'CustomerId', 'Surname'], axis=1)
     return df
 
