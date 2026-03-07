@@ -36,6 +36,8 @@ def get_basic_info(df: pd.DataFrame) -> None:
 
 
 if __name__ == "__main__":
-    path = "data/raw/Churn_Modelling.csv"
+    # ✅ absolute path بناءً على موقع الـ file
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    path = os.path.join(base_dir, "data", "raw", "Churn_Modelling.csv")
     df = load_raw_data(path)
     get_basic_info(df)
