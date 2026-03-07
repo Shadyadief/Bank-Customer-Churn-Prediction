@@ -27,11 +27,11 @@ def get_basic_info(df: pd.DataFrame) -> None:
     print("\n📊 معلومات البيانات:")
     print(f"  الأبعاد: {df.shape}")
     print(f"  الأعمدة: {list(df.columns)}")
-    print(f"\n🎯 توزيع الـ Target (Exited):")
+    print("\n🎯 توزيع الـ Target (Exited):")
     print(df['Exited'].value_counts())
     print("\n  النسب المئوية:")
     print((df['Exited'].value_counts(normalize=True) * 100).round(2))
-    print(f"\n❓ القيم الناقصة:")
+    print("\n❓ القيم الناقصة:")
     print(df.isnull().sum())
 
 
