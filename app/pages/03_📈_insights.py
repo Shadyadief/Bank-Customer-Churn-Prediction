@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 import plotly.express as px
+import os
 
 st.set_page_config(page_title="Model Insights", page_icon="📈", layout="wide")
 
@@ -10,11 +11,13 @@ st.markdown("مقارنة الموديلات وأهم العوامل المؤث�
 st.divider()
 
 # ─── Load Real Metrics ────────────────────────────────────────
+_BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 @st.cache_data
 def load_metrics():
     try:
-        metrics     = joblib.load("models/model_metrics.pkl")
-        feat_imp    = joblib.load("models/feature_importance.pkl")
+        metrics  = joblib.load(os.path.join(_BASE_DIR, "models", "model_metrics.pkl"))
+        feat_imp = joblib.load(os.path.join(_BASE_DIR, "models", "feature_importance.pkl"))
         return pd.DataFrame(metrics), feat_imp, True
     except Exception:
         return None, None, False
