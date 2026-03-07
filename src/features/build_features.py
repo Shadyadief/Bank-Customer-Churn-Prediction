@@ -1,5 +1,5 @@
 import pandas as pd
-import numpy as np # noqa: F401
+import numpy as np  # noqa: F401
 
 
 def add_balance_salary_ratio(df: pd.DataFrame) -> pd.DataFrame:
