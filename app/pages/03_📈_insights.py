@@ -395,32 +395,37 @@ with tab3:
 
     # Action recommendations
     st.markdown("<div style='margin-top:24px'></div>", unsafe_allow_html=True)
-    st.markdown(f"""
-    <div style="background:{C['bg']};border:1px solid {C['border']};
-                border-radius:16px;padding:24px 28px">
-      <div style="font-family:Syne,sans-serif;font-weight:700;font-size:1.05rem;
-                  color:{C['text_h']};margin-bottom:16px">
-        🎯 {"Recommended Actions" if LANG=="en" else "الإجراءات الموصى بها"}
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        {"".join([f'''
-        <div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.12);
-                    border-radius:10px;padding:12px 16px;font-size:0.82rem;color:{C["text_sub"]}">
-          {action}
-        </div>''' for action in (
-            ["📧 Launch targeted retention campaigns for age 45–60",
-             "🎁 Create bundled product offers to prevent over-saturation",
-             "📱 Build an engagement app feature to boost active membership",
-             "🇩🇪 Deploy a Germany-specific loyalty & retention program"]
-            if LANG == "en" else
-            ["📧 إطلاق حملات احتفاظ مستهدفة للفئة العمرية 45–60",
-             "🎁 إنشاء عروض مجمعة للمنتجات لمنع التشبع",
-             "📱 بناء ميزة تفاعل لزيادة نسبة الأعضاء النشطين",
-             "🇩🇪 تطوير برنامج ولاء خاص بعملاء ألمانيا"]
-        )])}
-      </div>
-    </div>
-    """, unsafe_allow_html=True)
+
+    actions_en = [
+        "📧 Launch targeted retention campaigns for age 45–60",
+        "🎁 Create bundled product offers to prevent over-saturation",
+        "📱 Build an engagement app feature to boost active membership",
+        "🇩🇪 Deploy a Germany-specific loyalty & retention program",
+    ]
+    actions_ar = [
+        "📧 إطلاق حملات احتفاظ مستهدفة للفئة العمرية 45–60",
+        "🎁 إنشاء عروض مجمعة للمنتجات لمنع التشبع",
+        "📱 بناء ميزة تفاعل لزيادة نسبة الأعضاء النشطين",
+        "🇩🇪 تطوير برنامج ولاء خاص بعملاء ألمانيا",
+    ]
+    actions      = actions_en if LANG == "en" else actions_ar
+    action_title = "Recommended Actions" if LANG == "en" else "الإجراءات الموصى بها"
+
+    actions_html = "".join([
+        f'<div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.12);'
+        f'border-radius:10px;padding:12px 16px;font-size:0.82rem;color:{C["text_sub"]}">{a}</div>'
+        for a in actions
+    ])
+
+    st.markdown(
+        f'<div style="background:{C["bg"]};border:1px solid {C["border"]};'
+        f'border-radius:16px;padding:24px 28px">'
+        f'<div style="font-family:Syne,sans-serif;font-weight:700;font-size:1.05rem;'
+        f'color:{C["text_h"]};margin-bottom:16px">🎯 {action_title}</div>'
+        f'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">{actions_html}</div>'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 4 — RADAR CHART
