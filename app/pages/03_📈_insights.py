@@ -325,8 +325,8 @@ with tab2:
         **PLOTLY_LAYOUT,
         title=t["feat_title"],
         height=480,
-        xaxis=dict(**PLOTLY_LAYOUT["xaxis"], title="Importance Score"),
     )
+    fig.update_xaxes(title_text="Importance Score")
     st.plotly_chart(fig, use_container_width=True)
 
     # Top feature callout
