@@ -28,9 +28,8 @@ def spider():
     """
 
     # ── Init session state ─────────────────────────────────────────
-    if "theme"        not in st.session_state: st.session_state.theme        = "dark"
-    if "lang"         not in st.session_state: st.session_state.lang         = "en"
-    if "sidebar_open" not in st.session_state: st.session_state.sidebar_open = True
+    if "theme" not in st.session_state: st.session_state.theme = "dark"
+    if "lang"  not in st.session_state: st.session_state.lang  = "en"
 
     THEME = st.session_state.theme
     LANG  = st.session_state.lang
@@ -79,6 +78,13 @@ def spider():
         background: linear-gradient(180deg, {NAV_BG} 0%, {NAV_BG2} 100%) !important;
         border-right: 1px solid {BORDER} !important;
         min-width: 230px !important;
+        width: 260px !important;
+        visibility: visible !important;
+        display: block !important;
+    }}
+    [data-testid="stSidebarCollapsedControl"] {{
+        display: flex !important;
+        visibility: visible !important;
     }}
     [data-testid="stSidebarNav"] {{ display: none !important; }}
     [data-testid="stSidebar"] div,
