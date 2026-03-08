@@ -6,17 +6,17 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import os
 
-# ⚡⚡⚡ PAGE CONFIG - أول حاجة ⚡⚡⚡
+# ─── Page Config ───────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="EDA Dashboard | Bank Churn",
-    page_icon="📊",
+    page_title="Model Insights | Bank Churn",
+    page_icon="📈",
     layout="wide",
-    initial_sidebar_state="expanded",  # مهم جداً
+    initial_sidebar_state="expanded",
 )
 
-# ⚡⚡⚡ استدعاء spider واستقبال القيم ⚡⚡⚡
+# ─── Spider + CSS ──────────────────────────────────────────────────────────────
 from spider import spider
-theme, lang = spider()  # ✅ استقبل القيم اللي spider بترجعها
+spider()
 
 def load_css():
     css_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "style.css")
