@@ -431,20 +431,19 @@ with tab4:
 
     radar_metrics = [c for c in metric_cols if c in df_models.columns]
     MODEL_COLORS  = ["#00d4ff", "#f43f5e", "#10b981", "#f59e0b", "#7c3aed"]
+    FILL_COLORS   = ["rgba(0,212,255,0.10)", "rgba(244,63,94,0.10)", "rgba(16,185,129,0.10)", "rgba(245,158,11,0.10)", "rgba(124,58,237,0.10)"]
 
     fig = go.Figure()
     for i, row in df_models.iterrows():
         vals   = [row[m] for m in radar_metrics]
-        vals  += [vals[0]]   # close polygon
+        vals  += [vals[0]]
         labels = radar_metrics + [radar_metrics[0]]
         fig.add_trace(go.Scatterpolar(
             r=vals, theta=labels,
             fill="toself",
             name=row["Model"],
             line=dict(color=MODEL_COLORS[i % len(MODEL_COLORS)], width=2),
-            fillcolor=MODEL_COLORS[i % len(MODEL_COLORS)].replace(")", ",0.08)").replace("rgb","rgba")
-                       if "rgb" in MODEL_COLORS[i % len(MODEL_COLORS)]
-                       else MODEL_COLORS[i % len(MODEL_COLORS)] + "14",
+            fillcolor=FILL_COLORS[i % len(FILL_COLORS)],
             opacity=0.85,
         ))
 
