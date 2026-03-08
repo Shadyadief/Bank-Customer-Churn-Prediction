@@ -360,8 +360,8 @@ with tab4:
         **PLOTLY_LAYOUT,
         title=t["corr_title"],
         height=520,
-        xaxis=dict(tickangle=-35, **PLOTLY_LAYOUT["xaxis"]),
     )
+    fig.update_xaxes(tickangle=-35)
     st.plotly_chart(fig, use_container_width=True)
 
     # Top correlations with Exited
