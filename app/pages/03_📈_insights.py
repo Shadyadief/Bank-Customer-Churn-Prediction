@@ -155,14 +155,30 @@ def load_metrics():
         feat_imp = joblib.load(os.path.join(_BASE, "models", "feature_importance.pkl"))
         return pd.DataFrame(metrics), feat_imp, True
     except Exception:
-        return None, None, False
+        fallback_metrics = [
+            {"Model": "Logistic Regression", "Accuracy": 0.8115, "ROC-AUC": 0.7634, "F1-Score (Churn)": 0.5012, "Precision": 0.5823, "Recall": 0.4401},
+            {"Model": "Random Forest",        "Accuracy": 0.8670, "ROC-AUC": 0.8571, "F1-Score (Churn)": 0.6089, "Precision": 0.7142, "Recall": 0.5312},
+            {"Model": "XGBoost",              "Accuracy": 0.8720, "ROC-AUC": 0.8812, "F1-Score (Churn)": 0.6241, "Precision": 0.7301, "Recall": 0.5450},
+        ]
+        fallback_feat = {
+            "Age":               0.2341,
+            "NumOfProducts":     0.1892,
+            "IsActiveMember":    0.1654,
+            "Balance":           0.1423,
+            "Geography_Germany": 0.0891,
+            "CreditScore":       0.0712,
+            "Gender_Male":       0.0534,
+            "Tenure":            0.0421,
+            "EstimatedSalary":   0.0389,
+            "HasCrCard":         0.0312,
+            "Geography_Spain":   0.0231,
+        }
+        return pd.DataFrame(fallback_metrics), fallback_feat, False
 
 df_models, feat_importance, loaded = load_metrics()
 
 if not loaded:
-    st.warning(t["model_warn"])
-    st.code("python src/models/train_model.py", language="bash")
-    st.stop()
+    st.info("📊 Showing sample data — run train_model.py to load real results.")
 
 # ─── Derived Info ──────────────────────────────────────────────────────────────
 metric_cols   = [c for c in df_models.columns if c != "Model"]
