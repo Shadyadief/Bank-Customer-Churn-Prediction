@@ -5,23 +5,24 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import os
 
-# ─── Page Config ───────────────────────────────────────────────────────────────
+# ⚡⚡⚡ PAGE CONFIG - أول حاجة ⚡⚡⚡
 st.set_page_config(
     page_title="EDA Dashboard | Bank Churn",
     page_icon="📊",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="expanded",  # مهم جداً
 )
 
-# ─── Spider + CSS ──────────────────────────────────────────────────────────────
+# ⚡⚡⚡ استدعاء spider واستقبال القيم ⚡⚡⚡
 from spider import spider
-spider()
+theme, lang = spider()  # ✅ استقبل القيم اللي spider بترجعها
 
 def load_css():
     css_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "style.css")
     if os.path.exists(css_path):
         with open(css_path) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
 
 load_css()
 
