@@ -15,20 +15,12 @@ NAV = [
 
 
 def spider():
-    """
-    ضيفي في أول كل صفحة:
-        from spider import spider
-        spider()
-    """
-
-    # ── Init session state ─────────────────────────────────────────
     if "theme" not in st.session_state: st.session_state.theme = "dark"
     if "lang"  not in st.session_state: st.session_state.lang  = "en"
 
     THEME = st.session_state.theme
     LANG  = st.session_state.lang
 
-    # ── Palette ────────────────────────────────────────────────────
     if THEME == "dark":
         NAV_BG  = "#0a0e1a"
         NAV_BG2 = "#0f172a"
@@ -56,24 +48,42 @@ def spider():
 
     FF = "Tajawal" if LANG == "ar" else "Syne"
 
-    # ── CSS ────────────────────────────────────────────────────────
     st.markdown(f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&family=Tajawal:wght@400;700;800&display=swap');
 
     /* ── App background ── */
     html, body,
-    [data-testid="stAppViewContainer"],
-    [data-testid="stMain"] {{
+    [data-testid="stAppViewContainer"] {{
         background-color: {APP_BG} !important;
-        color: {WHITE} !important;
+    }}
+    [data-testid="stMain"] {{
+        background-color: transparent !important;
     }}
 
-    /* ── Sidebar ── */
+    /* ── إخفاء زرار السهم نهائياً ── */
+    [data-testid="stSidebarCollapseButton"],
+    [data-testid="stSidebarCollapsedControl"],
+    [data-testid="collapsedControl"] {{
+        display: none !important;
+        visibility: hidden !important;
+        width: 0 !important;
+        overflow: hidden !important;
+    }}
+
+    /* ── Sidebar دايماً مفتوحة ── */
     [data-testid="stSidebar"] {{
         background: linear-gradient(180deg, {NAV_BG} 0%, {NAV_BG2} 100%) !important;
         border-right: 1px solid {BORDER} !important;
         min-width: 240px !important;
+        display: flex !important;
+        visibility: visible !important;
+    }}
+    [data-testid="stSidebar"][aria-expanded="false"] {{
+        margin-left: 0 !important;
+        transform: none !important;
+        min-width: 240px !important;
+        display: flex !important;
     }}
     [data-testid="stSidebarNav"] {{ display: none !important; }}
     [data-testid="stSidebar"] * {{
@@ -81,31 +91,7 @@ def spider():
         font-family: '{FF}', sans-serif !important;
     }}
 
-    /* ── السهم بيشتغل صح + بدون خلفية سوداء ── */
-    [data-testid="stSidebarCollapsedControl"] {{
-        background: linear-gradient(180deg, {NAV_BG} 0%, {NAV_BG2} 100%) !important;
-        border-right: 1px solid {BORDER} !important;
-        display: flex !important;
-        visibility: visible !important;
-    }}
-    [data-testid="stSidebarCollapsedControl"] button {{
-        color: {ACCENT} !important;
-        background: transparent !important;
-    }}
-
-    /* ── الـ main content يملأ الشاشة لما الـ sidebar مطوية ── */
-    [data-testid="stAppViewContainer"] {{
-        background-color: {APP_BG} !important;
-    }}
-    /* منع الخلفية السوداء وراء الـ sidebar ── */
-    .main .block-container {{
-        background-color: transparent !important;
-    }}
-    section[data-testid="stSidebarUserContent"] {{
-        padding-top: 0 !important;
-    }}
-
-    /* ── All sidebar buttons reset ── */
+    /* ── All sidebar buttons ── */
     [data-testid="stSidebar"] .stButton > button {{
         background: transparent !important;
         border: 1px solid transparent !important;
@@ -167,10 +153,9 @@ def spider():
     </style>
     """, unsafe_allow_html=True)
 
-    # ── Sidebar Content ────────────────────────────────────────────
     with st.sidebar:
 
-        # 1. Project Logo
+        # 1. Logo
         st.markdown(f"""
         <div style="text-align:center;padding:22px 10px 16px;
                     border-bottom:1px solid {BORDER}">
@@ -212,8 +197,7 @@ def spider():
                       border:1px solid rgba(10,102,194,0.40);color:#60a5fa">
               in LinkedIn
             </a>
-            <a href="https://github.com/Shadyadief/Bank-Customer-Churn-Prediction"
-               target="_blank"
+            <a href="https://github.com/Shadyadief/Bank-Customer-Churn-Prediction" target="_blank"
                style="padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;
                       text-decoration:none;background:{TGL_BG};
                       border:1px solid {BORDER};color:{WHITE}">
@@ -223,23 +207,19 @@ def spider():
         </div>
         """, unsafe_allow_html=True)
 
-        # 3. Theme + Lang toggles — rerun بس بعد ما نحفظ الـ state
+        # 3. Toggles
         tc1, tc2 = st.columns(2)
         with tc1:
             st.markdown('<div class="tgl-btn">', unsafe_allow_html=True)
-            if st.button(
-                "☀️ Light" if THEME == "dark" else "🌙 Dark",
-                key="sp_theme", use_container_width=True
-            ):
+            if st.button("☀️ Light" if THEME == "dark" else "🌙 Dark",
+                         key="sp_theme", use_container_width=True):
                 st.session_state.theme = "light" if THEME == "dark" else "dark"
                 st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
         with tc2:
             st.markdown('<div class="tgl-btn">', unsafe_allow_html=True)
-            if st.button(
-                "🌐 عربي" if LANG == "en" else "🌐 English",
-                key="sp_lang", use_container_width=True
-            ):
+            if st.button("🌐 عربي" if LANG == "en" else "🌐 English",
+                         key="sp_lang", use_container_width=True):
                 st.session_state.lang = "ar" if LANG == "en" else "en"
                 st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
