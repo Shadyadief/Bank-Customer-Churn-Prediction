@@ -131,6 +131,9 @@ st.markdown(f"""
     border: 1px solid {CARD_BDR};
     border-radius: 16px; padding: 18px 12px;
     text-align: center; height: 100%;
+    min-height: 100px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
     transition: transform .22s ease, box-shadow .22s ease;
     box-shadow: 0 4px 20px rgba(0,0,0,0.18);
 }}
