@@ -69,13 +69,31 @@ def spider():
         color: {WHITE} !important;
     }}
 
-    /* ── Sidebar always visible ── */
+    /* ── Sidebar always visible + hide collapse arrow ── */
     [data-testid="stSidebar"] {{
         background: linear-gradient(180deg, {NAV_BG} 0%, {NAV_BG2} 100%) !important;
         border-right: 1px solid {BORDER} !important;
         min-width: 240px !important;
         display: flex !important;
         visibility: visible !important;
+        transform: none !important;
+        transition: none !important;
+    }}
+    /* إخفاء زرار السهم اللي بيطوي الـ sidebar */
+    [data-testid="stSidebarCollapseButton"],
+    [data-testid="stSidebarCollapsedControl"],
+    button[kind="headerNoPadding"],
+    [data-testid="collapsedControl"] {{
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }}
+    /* منع الـ sidebar من الاختفاء */
+    [data-testid="stSidebar"][aria-expanded="false"] {{
+        margin-left: 0 !important;
+        display: flex !important;
+        visibility: visible !important;
+        min-width: 240px !important;
     }}
     [data-testid="stSidebarNav"]    {{ display: none !important; }}
     [data-testid="stSidebar"] *     {{ color: {WHITE} !important;
