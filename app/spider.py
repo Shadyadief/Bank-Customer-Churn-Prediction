@@ -69,35 +69,41 @@ def spider():
         color: {WHITE} !important;
     }}
 
-    /* ── Sidebar always visible + hide collapse arrow ── */
+    /* ── Sidebar ── */
     [data-testid="stSidebar"] {{
         background: linear-gradient(180deg, {NAV_BG} 0%, {NAV_BG2} 100%) !important;
         border-right: 1px solid {BORDER} !important;
         min-width: 240px !important;
+    }}
+    [data-testid="stSidebarNav"] {{ display: none !important; }}
+    [data-testid="stSidebar"] * {{
+        color: {WHITE} !important;
+        font-family: '{FF}', sans-serif !important;
+    }}
+
+    /* ── السهم بيشتغل صح + بدون خلفية سوداء ── */
+    [data-testid="stSidebarCollapsedControl"] {{
+        background: linear-gradient(180deg, {NAV_BG} 0%, {NAV_BG2} 100%) !important;
+        border-right: 1px solid {BORDER} !important;
         display: flex !important;
         visibility: visible !important;
-        transform: none !important;
-        transition: none !important;
     }}
-    /* إخفاء زرار السهم اللي بيطوي الـ sidebar */
-    [data-testid="stSidebarCollapseButton"],
-    [data-testid="stSidebarCollapsedControl"],
-    button[kind="headerNoPadding"],
-    [data-testid="collapsedControl"] {{
-        display: none !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
+    [data-testid="stSidebarCollapsedControl"] button {{
+        color: {ACCENT} !important;
+        background: transparent !important;
     }}
-    /* منع الـ sidebar من الاختفاء */
-    [data-testid="stSidebar"][aria-expanded="false"] {{
-        margin-left: 0 !important;
-        display: flex !important;
-        visibility: visible !important;
-        min-width: 240px !important;
+
+    /* ── الـ main content يملأ الشاشة لما الـ sidebar مطوية ── */
+    [data-testid="stAppViewContainer"] {{
+        background-color: {APP_BG} !important;
     }}
-    [data-testid="stSidebarNav"]    {{ display: none !important; }}
-    [data-testid="stSidebar"] *     {{ color: {WHITE} !important;
-                                       font-family: '{FF}', sans-serif !important; }}
+    /* منع الخلفية السوداء وراء الـ sidebar ── */
+    .main .block-container {{
+        background-color: transparent !important;
+    }}
+    section[data-testid="stSidebarUserContent"] {{
+        padding-top: 0 !important;
+    }}
 
     /* ── All sidebar buttons reset ── */
     [data-testid="stSidebar"] .stButton > button {{
