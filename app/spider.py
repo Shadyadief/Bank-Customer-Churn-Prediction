@@ -8,6 +8,7 @@ import os
 # ═══════════════════════════════════════════════════════════════════
 
 NAV = [
+    ("🏠", "Home",           "الرئيسية",      "app.py"),
     ("📊", "EDA Dashboard",  "لوحة التحليل",  "pages/01_📊_eda_dashboard.py"),
     ("🔮", "Predictor",      "توقع المغادرة", "pages/02_🔮_predictor.py"),
     ("📈", "Model Insights", "رؤى الموديل",   "pages/03_📈_insights.py"),
