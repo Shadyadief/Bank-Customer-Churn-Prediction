@@ -126,16 +126,31 @@ st.markdown(f"""
 [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {{
     display: flex !important; flex-direction: column !important;
 }}
+/* KPI row — force equal height on the column wrappers */
+[data-testid="stHorizontalBlock"]:first-of-type > [data-testid="stColumn"] > div {{
+    height: 110px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}}
+[data-testid="stHorizontalBlock"]:first-of-type > [data-testid="stColumn"] > div > div {{
+    height: 110px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}}
 .kpi-card {{
     background: {CARD_BG};
     border: 1px solid {CARD_BDR};
     border-radius: 16px; padding: 18px 12px;
-    text-align: center; height: 100%;
-    min-height: 100px;
+    text-align: center;
+    width: 100%;
+    height: 110px !important;
+    min-height: 110px !important;
+    max-height: 110px !important;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     transition: transform .22s ease, box-shadow .22s ease;
     box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    overflow: hidden;
 }}
 .kpi-card:hover {{
     transform: translateY(-5px);
